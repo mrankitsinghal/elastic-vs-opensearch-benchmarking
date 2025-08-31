@@ -1,0 +1,66 @@
+{
+  "basic-search": {
+    "description": "Simple text search query",
+    "query": {
+      "match": {
+        "title": "elasticsearch"
+      }
+    }
+  },
+  "filtered-search": {
+    "description": "Search with filters",
+    "query": {
+      "bool": {
+        "must": [
+          {"match": {"content": "search"}}
+        ],
+        "filter": [
+          {"term": {"status": "published"}},
+          {"range": {"date": {"gte": "2023-01-01"}}}
+        ]
+      }
+    }
+  },
+  "aggregation-query": {
+    "description": "Terms aggregation with metrics",
+    "query": {
+      "match_all": {}
+    },
+    "aggs": {
+      "categories": {
+        "terms": {
+          "field": "category.keyword",
+          "size": 10
+        },
+        "aggs": {
+          "avg_score": {
+            "avg": {
+              "field": "score"
+            }
+          }
+        }
+      }
+    }
+  },
+  "complex-bool-query": {
+    "description": "Complex boolean query with multiple conditions",
+    "query": {
+      "bool": {
+        "must": [
+          {"match": {"title": "performance"}}
+        ],
+        "should": [
+          {"match": {"content": "elasticsearch"}},
+          {"match": {"content": "opensearch"}}
+        ],
+        "filter": [
+          {"term": {"type": "article"}},
+          {"range": {"views": {"gte": 100}}}
+        ],
+        "must_not": [
+          {"term": {"status": "draft"}}
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+# Rally Configuration Example
+# Copy this file to rally.ini and customize with your settings
+
+[reporting]
+# Directory where Rally will store benchmark reports
+report_dir = rally_results
+
+[defaults]
+# Default Elasticsearch cluster endpoint
+# This will be overridden by environment variables in the benchmark scripts
+hosts = https://your-elasticsearch-cluster.com
+username = your-username
+password = your-password
+
+# Default OpenSearch/AWS Elasticsearch endpoint
+# Used for OpenSearch benchmarking
+aws_hosts = https://your-opensearch-cluster.amazonaws.com/
+
+# Default test duration in seconds
+duration = 600
+
+# Optional: Custom tracks directory
+# tracks_dir = /path/to/custom/tracks
+
+# Optional: HTTP connection settings
+# http_compress = true
+# verify_certs = false
+# timeout = 60
+
+# Optional: Logging configuration
+# log_level = INFO
+
+# Note: Most of these settings will be overridden by the benchmark scripts
+# which use environment variables for configuration. This file serves as
+# a fallback configuration for Rally.
